@@ -27,7 +27,7 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response &amp;&amp; error.response.status === 401) {
+    if (error.response && error.response.status === 401) {
       // Handle unauthorized access
       localStorage.removeItem('token');
       localStorage.removeItem('user');
@@ -36,5 +36,22 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+// Question-related API methods
+export const uploadQuestion = async (formData) => {
+  return api.post('/questions/upload', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
+};
+
+export const getClasses = async () => {
+  return api.get('/classes');
+};
+
+export const getSubjects = async () => {
+  return api.get('/subjects');
+};
 
 export default api;

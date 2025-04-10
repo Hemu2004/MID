@@ -117,4 +117,41 @@
   .glass-effect {
     @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-lg;
   }
+
+  /* Custom animations */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* File upload states */
+  .file-upload-active {
+    @apply border-accent-blue-400 bg-accent-blue-50;
+  }
+
+  .file-upload-reject {
+    @apply border-red-400 bg-red-50;
+  }
+
+  /* Floating labels */
+  .floating-label {
+    @apply absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 transition-all duration-200 pointer-events-none;
+  }
+
+  .floating-label-active {
+    @apply -translate-y-8 text-xs text-accent-blue-500;
+  }
+
+  /* Loading spinner */
+  .loading-spinner {
+    @apply inline-block h-5 w-5 animate-spin rounded-full border-2 border-solid border-current border-r-transparent;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }

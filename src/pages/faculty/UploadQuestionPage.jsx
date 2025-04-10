@@ -21,9 +21,24 @@ const UploadQuestionPage = () => {
   const [file, setFile] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  // Mock data
-  const classes = user?.classes || ['CSE-A', 'CSE-B'];
-  const subjects = user?.subjects || ['Web Technologies', 'Database Systems'];
+  const [classes, setClasses] = useState([]);
+  const [subjects, setSubjects] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [classesRes, subjectsRes] = await Promise.all([
+          getClasses(),
+          getSubjects()
+        ]);
+        setClasses(classesRes.data.map(c => c.name));
+        setSubjects(subjectsRes.data.map(s => s.name));
+      } catch (error) {
+        toast.error("Failed to load classes and subjects");
+      }
+    };
+    fetchData();
+  }, []);
   
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -36,7 +51,7 @@ const UploadQuestionPage = () => {
     setFile(null);
   };
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     // Validation
@@ -47,10 +62,19 @@ const UploadQuestionPage = () => {
     
     setIsSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      const formData = new FormData();
+      formData.append('type', type);
+      formData.append('title', title);
+      formData.append('subject', subject);
+      formData.append('className', targetClass);
+      formData.append('deadline', deadline);
+      formData.append('description', description);
+      formData.append('file', file);
+      formData.append('facultyId', user.facultyId);
+
+      await uploadQuestion(formData);
       toast.success("Question uploaded successfully!");
-      setIsSubmitting(false);
       
       // Reset form
       setTitle('');
@@ -60,7 +84,11 @@ const UploadQuestionPage = () => {
       setTargetClass('');
       setDeadline('');
       setFile(null);
-    }, 1500);
+    } catch (error) {
+      toast.error("Failed to upload question");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   
   return (
