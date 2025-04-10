@@ -1,0 +1,120 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    /* Updated primary color to sky blue (#33C3F0) */
+    --primary: 196 88% 57%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 196 88% 57%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 196 88% 57%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 196 88% 57%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 196 88% 57%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 196 88% 57%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .sidebar {
+    @apply fixed top-0 left-0 h-screen bg-[#33C3F0] text-white transition-all duration-300 ease-in-out z-50 shadow-lg;
+  }
+  
+  .sidebar-collapsed {
+    @apply w-16;
+  }
+  
+  .sidebar-expanded {
+    @apply w-64;
+  }
+  
+  .content-with-sidebar {
+    @apply transition-all duration-300 ease-in-out ml-16;
+  }
+  
+  .content-with-sidebar-expanded {
+    @apply ml-64;
+  }
+  
+  .menu-trigger {
+    @apply fixed top-4 left-4 z-50 bg-[#33C3F0] text-white p-3 rounded-full shadow-lg hover:bg-[#1eaddc] transition-all;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-xl hover:bg-sky-50;
+  }
+  
+  .btn-sky {
+    @apply bg-[#33C3F0] hover:bg-[#1eaddc] text-white;
+  }
+  
+  .gradient-bg {
+    @apply bg-gradient-to-br from-[#33C3F0] to-[#1eaddc];
+  }
+  
+  .glass-effect {
+    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-lg;
+  }
+}
